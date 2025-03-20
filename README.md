@@ -34,5 +34,5 @@ To run this project on your local machine, follow these steps:
 ### Installation Steps
 1. **Clone the Repository** (if you’re accessing it from GitHub):
    ```bash
-   git clone <repository-url>
-   cd <repository-name># my_python_project
+   git clone <https://github.com/CoastalBotany/my_python_project.git>
+   cd <https://github.com/CoastalBotany/my_python_project.git> # my_python_project
