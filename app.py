@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import numpy as np
 
 #Loading raw data
 df_original = pd.read_csv('vehicles_us.csv')
