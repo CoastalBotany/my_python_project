@@ -40,4 +40,3 @@ The deployed app can be accessed here: [Visit the Render App](https://vehicle-da
    git clone <https://github.com/CoastalBotany/my_python_project.git>
    cd <my_python_project> # my_python_project
 # my_python_project
-# my_python_project
