@@ -26,6 +26,9 @@ The project consists of the following files:
 ## Setup and Installation
 To run this project on your local machine, follow these steps:
 
+## Render App
+The deployed app can be accessed here: [Visit the Render App](https://vehicle-dashboard-project-4.onrender.com)
+
 ### Prerequisites
 - Python 3.7 or higher installed on your machine.
 - A code editor (e.g., VS Code, PyCharm) to edit the project files.
@@ -35,4 +38,4 @@ To run this project on your local machine, follow these steps:
 1. **Clone the Repository** (if you’re accessing it from GitHub):
    ```bash
    git clone <https://github.com/CoastalBotany/my_python_project.git>
-   cd <https://github.com/CoastalBotany/my_python_project.git> # my_python_project
+   cd <my_python_project> # my_python_project
