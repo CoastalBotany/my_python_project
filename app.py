@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+#Loading raw data
+df_original = pd.read_csv('vehicles_us.csv')
+
+# Summarized data (already in your app.py)
 data = {
     'condition': ['excellent', 'fair', 'good', 'like new', 'new', 'salvage'],
     'mean_price': [12806.669842, 3386.502178, 10877.439067, 16677.445593, 26050.380699, 4242.295552],
@@ -15,16 +19,14 @@ data = {
 stats_df = pd.DataFrame(data)
 
 #Creating the Streamlit dashboard
-
-#Adding a header
 st.header("Vehicle Price and Listing Duration Dashboard")
 
-#Adding a checkbox to toggle between mean and median values.
+#Adding a checkbox to toggle between mean and median values
 use_median = st.checkbox("Use Median Values Instead of Mean", value=False)
 
-#Creating Scatter Plot.
+#Creating the scatter plot
 if use_median:
-    #Ploting using median values.
+    #Plotting using median values
     fig = px.scatter(
         stats_df,
         x='median_days_listed',
@@ -36,7 +38,7 @@ if use_median:
         labels={'median_days_listed': 'Median Days Listed', 'median_price': 'Median Price'}
     )
 else:
-    #Ploting using mean values.
+    #Plotting using mean values
     fig = px.scatter(
         stats_df,
         x='mean_days_listed',
@@ -48,5 +50,62 @@ else:
         labels={'mean_days_listed': 'Mean Days Listed', 'mean_price': 'Mean Price'}
     )
 
-#Displaying the scatter plot.
+#Displaying scatter plot
 st.plotly_chart(fig)
+
+#Adding histogram of vehicle prices by condition
+st.header("Distribution of Vehicle Prices by Condition")
+if use_median:
+    fig_hist_price = px.histogram(
+        stats_df,
+        x='median_price',
+        color='condition',
+        title='Histogram of Median Prices by Condition',
+        labels={'median_price': 'Median Price', 'condition': 'Condition'},
+        nbins=10
+    )
+else:
+    fig_hist_price = px.histogram(
+        stats_df,
+        x='mean_price',
+        color='condition',
+        title='Histogram of Mean Prices by Condition',
+        labels={'mean_price': 'Mean Price', 'condition': 'Condition'},
+        nbins=10
+    )
+
+#Displaying the price histogram
+st.plotly_chart(fig_hist_price)
+
+# Adding histogram of odometer readings with mean and median lines
+st.header("Distribution of Odometer Readings")
+fig_hist_odometer = px.histogram(
+    df_original,
+    x='odometer',
+    title='Distribution of Odometer Readings',
+    nbins=30,
+    opacity=0.7
+)
+
+# Calculate mean and median odometer values
+mean_odometer = df_original['odometer'].mean()
+median_odometer = df_original['odometer'].median()
+
+# Add vertical lines for mean and median
+fig_hist_odometer.add_vline(
+    x=mean_odometer,
+    line_dash="dash",
+    line_color="red",
+    annotation_text="Mean",
+    annotation_position="top left"
+)
+fig_hist_odometer.add_vline(
+    x=median_odometer,
+    line_dash="dash",
+    line_color="green",
+    annotation_text="Median",
+    annotation_position="top left"
+)
+
+# Display the odometer histogram
+st.plotly_chart(fig_hist_odometer)
